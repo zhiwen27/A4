@@ -1,5 +1,4 @@
 import java.util.Scanner;
-import java.io.StringReader;
 import java.util.ArrayDeque;
 import java.util.Iterator;
 
@@ -58,5 +57,6 @@ public class Postfix {
       }
     }
     System.out.println(stack.getFirst());
+    scanner.close();
   }
 }
