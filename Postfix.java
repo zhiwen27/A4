@@ -11,7 +11,6 @@ public class Postfix {
 
   /** Run short test */
   public static void main(String[] args) {
-    //String input = "";
     // if (args.length == 0) {
     //   // If no arguments passed, print instructions
     //   System.err.println("Usage:  java Postfix <expr>");
