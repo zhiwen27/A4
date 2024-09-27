@@ -1,5 +1,4 @@
 import java.util.Scanner;
-import java.util.Hashtable;
 import java.util.Iterator;
 import java.io.StringReader;
 import java.util.ArrayDeque;
@@ -11,19 +10,7 @@ import java.util.ArrayList;
  */
 public class Calculate {
 
-  /** Run short test */
-  public static void main(String[] args) {
-    // if (args.length == 0) {
-    //   // If no arguments passed, print instructions
-    //   System.err.println("Usage:  java Calculate <expr>");
-    // } else {
-    //   // Otherwise, echo what was read in for now
-    //   Scanner input = new Scanner(new StringReader(args[0]));
-    //   while (input.hasNext()) {
-    //     System.out.println(input.next());
-    //   }
-    // }
-
+  public static double run(String inputLine){
     ArrayList<Character> operator = new ArrayList<>(5);
     operator.add('+'); operator.add('-'); operator.add('*'); operator.add('/'); operator.add('^');
     ArrayList<Integer> precedence = new ArrayList<>(5);
@@ -32,8 +19,6 @@ public class Calculate {
     ArrayDeque<Object> outputQueue = new ArrayDeque<>();
     ArrayDeque<Object> stack = new ArrayDeque<>();
 
-    Scanner scanner = new Scanner(System.in);
-    String inputLine = scanner.nextLine();
     ArrayDeque<Object> input = Tokenizer.readTokens(inputLine);
     Iterator<Object> iterator = input.iterator();{
       while(iterator.hasNext()){
@@ -87,7 +72,24 @@ public class Calculate {
     while(iterator2.hasNext()){
       convertedInput += iterator2.next() + " ";
     }
-    System.out.println(Postfix.run(convertedInput));
-    scanner.close();
+
+    return Postfix.run(convertedInput);
+  }
+
+  /** Run short test */
+  public static void main(String[] args) {
+    String inputLine = "";
+    if (args.length == 0) {
+      // If no arguments passed, print instructions
+      System.err.println("Usage:  java Postfix <expr>");
+    } else {
+      // Otherwise, echo what was read in for now
+      Scanner scannerTest = new Scanner(new StringReader(args[0]));
+      while (scannerTest.hasNext()) {
+        inputLine += scannerTest.next() + " ";
+      }
+      scannerTest.close();
+    }
+    System.err.println(Calculate.run(inputLine));
   }
 }
