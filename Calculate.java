@@ -52,8 +52,10 @@ public class Calculate {
         if (o instanceof Character){
           if ((!o.equals('(')) && (!o.equals(')'))){
             if (operator.contains((Character)o)){
-              if ((precedence.get(operator.indexOf(o)) <= precedence.get(operator.indexOf((Character)stack.getLast())))){
-                outputQueue.push(stack.pop());
+              while ((!stack.isEmpty()) && (operator.contains(stack.getLast()))){
+                if ((precedence.get(operator.indexOf(o)) <= precedence.get(operator.indexOf((Character)stack.getLast())))){
+                  outputQueue.push(stack.pop());
+                }
               }
               stack.push(o);
             }
@@ -63,9 +65,6 @@ public class Calculate {
             stack.push(o);
           }
 //         if (o.equals('(')){
-//           if (!stack.getFirst().equals('(')){
-//             throw new RuntimeException("Mismatched parentheses.");
-//           }
 //           while(!stack.getLast().equals('(')){
 //             outputQueue.push(stack.pop());;
 //           }
@@ -74,6 +73,11 @@ public class Calculate {
         }
       }
     }
-    
+    // should reverse it
+    Iterator<Object> iterator2 = outputQueue.iterator();
+    while(iterator2.hasNext()){
+      Object o = iterator2.next();
+      System.out.println(o);
+    }
   }
 }
