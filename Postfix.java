@@ -1,6 +1,7 @@
 import java.util.Scanner;
 import java.util.ArrayDeque;
 import java.util.Iterator;
+import java.io.StringReader;
 
 /** 
  * Class to interpret and compute the result of arithmetic expressions 
@@ -8,21 +9,7 @@ import java.util.Iterator;
  */
 public class Postfix {
 
-  /** Run short test */
-  public static void main(String[] args) {
-    // if (args.length == 0) {
-    //   // If no arguments passed, print instructions
-    //   System.err.println("Usage:  java Postfix <expr>");
-    // } else {
-    //   // Otherwise, echo what was read in for now
-    //   Scanner scannerTest = new Scanner(new StringReader(args[0]));
-    //   while (scannerTest.hasNext()) {
-    //     //System.out.println(scannerTest.next());
-    //     input = scannerTest.next();
-    //   }
-    // }
-    Scanner scanner = new Scanner(System.in);
-    String input = scanner.nextLine();
+  public static double run(String input){
     ArrayDeque<Object> inputQueue = Tokenizer.readTokens(input);
     ArrayDeque<Object> stack = new ArrayDeque<>();
     Iterator<Object> iterator = inputQueue.iterator();
@@ -56,7 +43,25 @@ public class Postfix {
          }
       }
     }
-    System.out.println(stack.getFirst());
-    scanner.close();
+    return (double)stack.getFirst();
+  }
+
+  /** Run short test */
+  public static void main(String[] args) {
+    // if (args.length == 0) {
+    //   // If no arguments passed, print instructions
+    //   System.err.println("Usage:  java Postfix <expr>");
+    // } else {
+    //   // Otherwise, echo what was read in for now
+    //   Scanner scannerTest = new Scanner(new StringReader(args[0]));
+    //   while (scannerTest.hasNext()) {
+    //     System.out.println(scannerTest.next());
+    //   }
+    //   scannerTest.close();
+    // }
+    Scanner sc = new Scanner(System.in);
+    String input = sc.nextLine();
+    System.err.println(Postfix.run(input));
+    sc.close();
   }
 }

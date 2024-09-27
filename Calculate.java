@@ -50,14 +50,12 @@ public class Calculate {
          outputQueue.push(o);
         }
         if (o instanceof Character){
-          if ((!o.equals('(')) && (!o.equals(')'))){
-            if (operator.contains((Character)o)){
-              while ((!stack.isEmpty()) && (operator.contains(stack.getLast()))){
-                if ((precedence.get(operator.indexOf(o)) <= precedence.get(operator.indexOf((Character)stack.getLast())))){
-                  outputQueue.push(stack.pop());
-                }
+          if (operator.contains((Character)o)){
+            while ((!stack.isEmpty()) && (operator.contains(stack.getFirst()))){
+              System.out.println("here");
+              if ((precedence.get(operator.indexOf(o)) <= precedence.get(operator.indexOf((Character)stack.getFirst())))){
+                outputQueue.push(stack.pop());
               }
-              stack.push(o);
             }
             stack.push(o);
           }
