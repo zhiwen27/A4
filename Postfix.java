@@ -40,6 +40,12 @@ public class Postfix {
              double first = (double)stack.pop();
              stack.push(last / first);
            }
+           else if (o.equals('^')){
+             // disaster
+             double last = (double)stack.pop();
+             double first = (double)stack.pop();
+             stack.push(Math.pow(last,first));
+           }
          }
       }
     }

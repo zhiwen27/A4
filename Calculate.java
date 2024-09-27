@@ -25,17 +25,9 @@ public class Calculate {
     // }
 
     ArrayList<Character> operator = new ArrayList<>(5);
-    operator.add('+');
-    operator.add('-');
-    operator.add('*');
-    operator.add('/');
-    operator.add('^');
+    operator.add('+'); operator.add('-'); operator.add('*'); operator.add('/'); operator.add('^');
     ArrayList<Integer> precedence = new ArrayList<>(5);
-    precedence.add(0);
-    precedence.add(0);
-    precedence.add(1);
-    precedence.add(1);
-    precedence.add(2);
+    precedence.add(0); precedence.add(0); precedence.add(1); precedence.add(1); precedence.add(2);
 
     ArrayDeque<Object> outputQueue = new ArrayDeque<>();
     ArrayDeque<Object> stack = new ArrayDeque<>();
@@ -50,11 +42,19 @@ public class Calculate {
          outputQueue.add(o);
         }
         if (o instanceof Character){
-          if (operator.contains((Character)o)){
-            while ((!stack.isEmpty()) && (operator.contains((Character)stack.getFirst()) && (precedence.get(operator.indexOf(o)) <= precedence.get(operator.indexOf((Character)stack.getFirst()))))){
-              outputQueue.add(stack.pop());
+          if ((operator.contains((Character)o))){
+            if (!o.equals('^')){
+              while ((!stack.isEmpty()) && (operator.contains((Character)stack.getFirst()) && (precedence.get(operator.indexOf(o)) <= precedence.get(operator.indexOf((Character)stack.getFirst()))))){
+                outputQueue.add(stack.pop());
+              }
+              stack.push(o);
             }
-            stack.push(o);
+            else if (o.equals('^')){
+              while ((!stack.isEmpty()) && (operator.contains((Character)stack.getFirst()) && (precedence.get(operator.indexOf(o)) < precedence.get(operator.indexOf((Character)stack.getFirst()))))) {
+                outputQueue.add(stack.pop());
+              }
+              stack.push(o);
+            }
           }
           if (o.equals('(')){
             stack.push(o);
@@ -67,8 +67,6 @@ public class Calculate {
             // If stack runs out: report paren mismatch
           }
         }
-        System.out.println(outputQueue);
-        System.out.println(stack);
       }
       while (!stack.isEmpty()){
         if ((stack.getFirst().equals('(')) || (stack.getFirst().equals(')'))){
@@ -81,8 +79,11 @@ public class Calculate {
       }
     }
     Iterator<Object> iterator2= outputQueue.iterator();
+    String convertedInput= "";
     while(iterator2.hasNext()){
-      System.out.print(iterator2.next() + " ");
+      convertedInput += iterator2.next() + " ";
     }
+    System.out.println(Postfix.run(convertedInput));
+    scanner.close();
   }
 }
