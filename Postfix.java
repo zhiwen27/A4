@@ -33,18 +33,18 @@ public class Postfix {
            else if (o.equals('-')){
              double last = (double)stack.pop();
              double first = (double)stack.pop();
-             stack.push(last - first);
+             stack.push(first - last);
            }
            else if (o.equals('/')){
              double last = (double)stack.pop();
              double first = (double)stack.pop();
-             stack.push(last / first);
+             stack.push(first / last);
            }
            else if (o.equals('^')){
              // disaster
              double last = (double)stack.pop();
              double first = (double)stack.pop();
-             stack.push(Math.pow(last,first));
+             stack.push(Math.pow(first,last));
            }
          }
       }

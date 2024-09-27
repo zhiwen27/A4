@@ -63,8 +63,12 @@ public class Calculate {
             while(!stack.getFirst().equals('(')){
               outputQueue.add(stack.pop());;
             }
-            stack.pop();
-            // If stack runs out: report paren mismatch
+            if (stack.isEmpty()){
+              System.out.println("Mismatched Parenthesis.");
+            }
+            else{
+              stack.pop();
+            }
           }
         }
       }
