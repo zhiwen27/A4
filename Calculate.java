@@ -51,11 +51,8 @@ public class Calculate {
         }
         if (o instanceof Character){
           if (operator.contains((Character)o)){
-            while ((!stack.isEmpty()) && (operator.contains(stack.getFirst()))){
-              System.out.println("here");
-              if ((precedence.get(operator.indexOf(o)) <= precedence.get(operator.indexOf((Character)stack.getFirst())))){
-                outputQueue.push(stack.pop());
-              }
+            while ((!stack.isEmpty()) && (operator.contains((Character)stack.getFirst()) && (precedence.get(operator.indexOf(o)) <= precedence.get(operator.indexOf((Character)stack.getFirst()))))){
+              outputQueue.push(stack.pop());
             }
             stack.push(o);
           }
