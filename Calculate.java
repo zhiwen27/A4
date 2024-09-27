@@ -47,32 +47,42 @@ public class Calculate {
       while(iterator.hasNext()){
         Object o = iterator.next();
         if (o instanceof Double){
-         outputQueue.push(o);
+         outputQueue.add(o);
         }
         if (o instanceof Character){
           if (operator.contains((Character)o)){
             while ((!stack.isEmpty()) && (operator.contains((Character)stack.getFirst()) && (precedence.get(operator.indexOf(o)) <= precedence.get(operator.indexOf((Character)stack.getFirst()))))){
-              outputQueue.push(stack.pop());
+              outputQueue.add(stack.pop());
             }
             stack.push(o);
           }
-          if (o.equals(')')){
+          if (o.equals('(')){
             stack.push(o);
           }
-//         if (o.equals('(')){
-//           while(!stack.getLast().equals('(')){
-//             outputQueue.push(stack.pop());;
-//           }
-//           stack.pop();
-//         }
+          if (o.equals(')')){
+            while(!stack.getFirst().equals('(')){
+              outputQueue.add(stack.pop());;
+            }
+            stack.pop();
+            // If stack runs out: report paren mismatch
+          }
+        }
+        System.out.println(outputQueue);
+        System.out.println(stack);
+      }
+      while (!stack.isEmpty()){
+        if ((stack.getFirst().equals('(')) || (stack.getFirst().equals(')'))){
+          System.out.println("Mismatched Parenthesis.");
+          stack.pop();
+        }
+        else if (operator.contains((Character)stack.getFirst())){
+          outputQueue.add(stack.pop());
         }
       }
     }
-    // should reverse it
-    Iterator<Object> iterator2 = outputQueue.iterator();
+    Iterator<Object> iterator2= outputQueue.iterator();
     while(iterator2.hasNext()){
-      Object o = iterator2.next();
-      System.out.println(o);
+      System.out.print(iterator2.next() + " ");
     }
   }
 }
