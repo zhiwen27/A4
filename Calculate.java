@@ -69,7 +69,7 @@ public class Calculate {
             }
             // if the stack runs out without finding a left parenthesis, report mismatched parentheses
             if (stack.isEmpty()){
-              System.out.println("Mismatched Parenthesis.");
+              throw new RuntimeException("Mismatched Parenthesis.");
             }
             // pop the left parenthesis from the stack (but not onto the output queue)
             else{
@@ -80,12 +80,11 @@ public class Calculate {
       }
       // while there are still tokens in the stack
       while (!stack.isEmpty()){
-        // if it is an operator, pop it onto the output queue
-        if ((stack.getFirst().equals('(')) || (stack.getFirst().equals(')'))){
-          System.out.println("Mismatched Parenthesis.");
-          stack.pop();
-        }
         // if the token on the top of the stack is a parenthesis, report mismatched parentheses
+        if ((stack.getFirst().equals('(')) || (stack.getFirst().equals(')'))){
+          throw new RuntimeException("Mismatched Parenthesis.");
+        }
+        // if it is an operator, pop it onto the output queue
         else if (operator.contains((Character)stack.getFirst())){
           outputQueue.add(stack.pop());
         }

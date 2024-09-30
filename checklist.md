@@ -22,7 +22,7 @@ __YES___ 2 pts: Processes operators by popping & combining numbers
 
 __YES___ 2 pts: Produces correct answer to any valid postfix expression
 
-__Part___ 1 pts: Throws an exception with an informative error message in case of malformed expressions
+__YES___ 1 pts: Throws an exception with an informative error message in case of malformed expressions
 
 
 Calculate.java:
